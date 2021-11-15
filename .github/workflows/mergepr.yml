@@ -29,13 +29,13 @@ jobs:
         run: git describe --tags --abbrev=0
 
       - name: Set old tag
-        run: dotnet run -- set dotnet-version.csproj `git describe --tags --abbrev=0`
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git describe --tags --abbrev=0`
 
       - name: Bump tag
-        run: dotnet run -- bump --patch
+        run: dotnet run -f net6.0 -- bump --patch
 
       - name: View new tag
-        run: dotnet run -- get
+        run: dotnet run -f net6.0 -- get
 
       - name: Commit tag
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Set new git tag
         run: |
-          git tag -m "CI" `dotnet run -- get`
+          git tag -m "CI" `dotnet run -f net6.0 -- get`
 
       - name: Push tag
         run: |

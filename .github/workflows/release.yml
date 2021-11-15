@@ -29,7 +29,7 @@ jobs:
         run: dotnet restore
 
       - name: .NET Update version to ${{ github.ref }}
-        run: dotnet run -- set dotnet-version.csproj ${{ github.ref }}
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj ${{ github.ref }}
 
       - name: .NET Build (win10-x64)
         run: |
