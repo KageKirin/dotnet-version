@@ -6,14 +6,12 @@ name: Merge Pull Request
 on:
   pull_request:
     types: [closed]
-  branches:
-    - "main"
 
 jobs:
   bump:
     name: Bump tag
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == 'true' && github.event.base_ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET Core @ Latest
@@ -29,13 +27,13 @@ jobs:
         run: git describe --tags --abbrev=0
 
       - name: Set old tag
-        run: dotnet run -- set dotnet-version.csproj `git describe --tags --abbrev=0`
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git describe --tags --abbrev=0`
 
       - name: Bump tag
-        run: dotnet run -- bump --patch
+        run: dotnet run -f net6.0 -- bump --patch
 
       - name: View new tag
-        run: dotnet run -- get
+        run: dotnet run -f net6.0 -- get
 
       - name: Commit tag
         run: |
@@ -44,7 +42,7 @@ jobs:
 
       - name: Set new git tag
         run: |
-          git tag -m "CI" `dotnet run -- get`
+          git tag -m "CI" `dotnet run -f net6.0 -- get`
 
       - name: Push tag
         run: |
