@@ -1,0 +1,6 @@
+# .gitignore for dotnet-version
+
+## output folders
+obj/
+bin/
+nupkg/
