@@ -6,14 +6,12 @@ name: Merge Pull Request
 on:
   pull_request:
     types: [closed]
-  branches:
-    - "main"
 
 jobs:
   bump:
     name: Bump tag
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == 'true' && github.event.base_ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET Core @ Latest
