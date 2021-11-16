@@ -34,6 +34,11 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ github.TOKEN }}
 
+      - name: Configure git
+        run: |
+          git config --local user.email "kagekirin+ci@gmail.com"
+          git config --local user.name "CI Bot"
+
       - name: Find tag
         run: |
           git fetch --tags
