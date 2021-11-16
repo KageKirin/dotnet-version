@@ -9,6 +9,15 @@ on:
       - '*'
 
 jobs:
+  check:
+    name: Assumption check
+    runs-on: ubuntu-latest
+    steps:
+      - name: print base_ref
+        run: echo ${{ github.event.base_ref }}
+      - name: print ref
+        run: echo ${{ github.ref }}
+      - uses: actions/checkout@v2
   build:
     name: Build
     if: github.event.base_ref == 'refs/heads/main'
