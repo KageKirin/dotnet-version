@@ -72,6 +72,4 @@ jobs:
           git tag -m "CI" `dotnet run -f net6.0 -- get`
 
       - name: Push tag
-        run: |
-          git push --tags https://${{ secrets.GH_CHAIN_TOKEN }}@github.com/kagekirin/dotnet-version.git
-          git push --follow-tags https://${{ secrets.GH_CHAIN_TOKEN }}@github.com/kagekirin/dotnet-version.git
+        run: git push --follow-tags https://${{ secrets.GH_CHAIN_TOKEN }}@github.com/kagekirin/dotnet-version.git
