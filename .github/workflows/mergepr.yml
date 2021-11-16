@@ -28,7 +28,7 @@ jobs:
       - name: Find tag
         run: |
           git fetch --tags
-          git describe --tags --abbrev=0
+          git describe --tags --abbrev=0 --always
 
       - name: Set old tag
         run: dotnet run -f net6.0 -- set dotnet-version.csproj `git describe --tags --abbrev=0`
