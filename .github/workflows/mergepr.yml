@@ -73,5 +73,5 @@ jobs:
 
       - name: Push tag
         run: |
-          git push --tags --password ${{ secrets.GH_CHAIN_TOKEN }}
-          git push --follow-tags --password ${{ secrets.GH_CHAIN_TOKEN }}
+          git push --tags https://${{ secrets.GH_CHAIN_TOKEN }}@github.com/kagekirin/dotnet-version.git
+          git push --follow-tags https://${{ secrets.GH_CHAIN_TOKEN }}@github.com/kagekirin/dotnet-version.git
