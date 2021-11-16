@@ -55,6 +55,7 @@ jobs:
         run: git tag -l --sort v:refname
 
       - name: Fetch tags
+        if: false
         run: git fetch --tags
 
       - name: .NET Restore
