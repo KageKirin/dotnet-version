@@ -25,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_CHAIN_TOKEN }}
+          persist-credentials: false
       - name: Setup .NET Core @ Latest
         uses: actions/setup-dotnet@v1
         with:
@@ -70,5 +73,5 @@ jobs:
 
       - name: Push tag
         run: |
-          git push --tags
-          git push --follow-tags
+          git push --tags --password ${{ secrets.GH_CHAIN_TOKEN }}
+          git push --follow-tags --password ${{ secrets.GH_CHAIN_TOKEN }}
