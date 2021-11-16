@@ -38,11 +38,15 @@ jobs:
         run: |
           git fetch --tags
           git tag -l | tail -n 1
+
+      - name: Find tag (old)
+        if: false
+        run: |
           git describe --tags --abbrev=1 --always
           git describe --tags --abbrev=0
 
       - name: Set old tag
-        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git describe --tags --abbrev=0`
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git tag -l | tail -n 1`
 
       - name: Bump tag
         run: dotnet run -f net6.0 -- bump --patch
