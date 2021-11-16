@@ -70,4 +70,5 @@ jobs:
 
       - name: Push tag
         run: |
-          git push origin --follow-tags
+          git push --tags
+          git push --follow-tags
