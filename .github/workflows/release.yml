@@ -16,11 +16,21 @@ jobs:
       - name: print base_ref
         run: echo ${{ github.event.base_ref }}
       - name: print ref
-        run: echo ${{ github.ref }}
+        run: |
+          echo ${{ github.ref }}
+          echo $GITHUB_REF
       - name: print ref_name
-        run: echo ${{ github.ref_name }}
+        run: |
+          echo ${{ github.ref_name }}
+          echo $GITHUB_REF_NAME
       - name: print base_ref
-        run: echo ${{ github.base_ref }}
+        run: |
+          echo ${{ github.base_ref }}
+          echo $GITHUB_BASE_REF
+      - name: print tag
+        run: |
+          echo ${{ github.tag }}
+          echo $GITHUB_TAG
       - name: if base_ref is main
         if: ${{ github.base_ref == 'refs/heads/main' }}
         run: echo "base ref is main"
@@ -28,7 +38,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    if: ${{ github.base_ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET Core @ Latest
