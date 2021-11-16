@@ -58,7 +58,7 @@ jobs:
         run: dotnet restore
 
       - name: .NET Update version to ${{ github.ref }}
-        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git tag -l --sort v:refname | tail -n 1`
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj ${{ github.ref_name }}
 
       - name: .NET Build (win10-x64)
         run: |
