@@ -175,5 +175,4 @@ jobs:
 
       - name: .NET Publish NuGet
         run: |
-          tag = "`git tag -l --sort v:refname | tail -n 1`"
-          gpr push nupkg/dotnet-version.$tag.nupkg -k ${{ github.TOKEN }}
+          gpr push nupkg/dotnet-version.${{ github.ref_name }}.nupkg -k ${{ github.TOKEN }}
