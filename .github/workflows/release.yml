@@ -111,61 +111,61 @@ jobs:
       - name: Prepare release artifacts (win10-x64)
         run: |
           ls ./bin/Release/net6.0/win10-x64/publish/
-          tar caf dotnet-version-win10-x64.tar.gz -C ./bin/Release/net6.0/win10-x64/publish/ .
-          tar tvf dotnet-version-win10-x64.tar.gz
+          tar caf dotnet-version-${{ github.ref_name }}-win10-x64.tar.gz -C ./bin/Release/net6.0/win10-x64/publish/ .
+          tar tvf dotnet-version-${{ github.ref_name }}-win10-x64.tar.gz
       - name: Upload release artifacts (win10-x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dotnet-version-win10-x64.tar.gz
-          asset_name: dotnet-version-win10-x64.tar.gz
+          asset_path: ./dotnet-version-${{ github.ref_name }}-win10-x64.tar.gz
+          asset_name: dotnet-version-${{ github.ref_name }}-win10-x64.tar.gz
           asset_content_type: application/gzip
 
       - name: Prepare release artifacts (osx.11.0-x64)
         run: |
           ls ./bin/Release/net6.0/osx.11.0-x64/publish/
-          tar caf dotnet-version-osx.11.0-x64.tar.gz -C ./bin/Release/net6.0/osx.11.0-x64/publish/ .
-          tar tvf dotnet-version-osx.11.0-x64.tar.gz
+          tar caf dotnet-version-${{ github.ref_name }}-osx.11.0-x64.tar.gz -C ./bin/Release/net6.0/osx.11.0-x64/publish/ .
+          tar tvf dotnet-version-${{ github.ref_name }}-osx.11.0-x64.tar.gz
       - name: Upload release artifacts (osx.11.0-x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dotnet-version-osx.11.0-x64.tar.gz
-          asset_name: dotnet-version-osx.11.0-x64.tar.gz
+          asset_path: ./dotnet-version-${{ github.ref_name }}-osx.11.0-x64.tar.gz
+          asset_name: dotnet-version-${{ github.ref_name }}-osx.11.0-x64.tar.gz
           asset_content_type: application/gzip
 
       - name: Prepare release artifacts (linux-x64)
         run: |
           ls ./bin/Release/net6.0/linux-x64/publish/
-          tar caf dotnet-version-linux-x64.tar.gz -C ./bin/Release/net6.0/linux-x64/publish/ .
-          tar tvf dotnet-version-linux-x64.tar.gz
+          tar caf dotnet-version-${{ github.ref_name }}-linux-x64.tar.gz -C ./bin/Release/net6.0/linux-x64/publish/ .
+          tar tvf dotnet-version-${{ github.ref_name }}-linux-x64.tar.gz
       - name: Upload release artifacts (linux-x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dotnet-version-linux-x64.tar.gz
-          asset_name: dotnet-version-linux-x64.tar.gz
+          asset_path: ./dotnet-version-${{ github.ref_name }}-linux-x64.tar.gz
+          asset_name: dotnet-version-${{ github.ref_name }}-linux-x64.tar.gz
           asset_content_type: application/gzip
 
       - name: Prepare release artifacts (linux-musl-x64)
         run: |
           ls ./bin/Release/net6.0/linux-musl-x64/publish/
-          tar caf dotnet-version-linux-musl-x64.tar.gz -C ./bin/Release/net6.0/linux-musl-x64/publish/ .
-          tar tvf dotnet-version-linux-musl-x64.tar.gz
+          tar caf dotnet-version-${{ github.ref_name }}-linux-musl-x64.tar.gz -C ./bin/Release/net6.0/linux-musl-x64/publish/ .
+          tar tvf dotnet-version-${{ github.ref_name }}-linux-musl-x64.tar.gz
       - name: Upload release artifacts (linux-musl-x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dotnet-version-linux-musl-x64.tar.gz
-          asset_name: dotnet-version-linux-musl-x64.tar.gz
+          asset_path: ./dotnet-version-${{ github.ref_name }}-linux-musl-x64.tar.gz
+          asset_name: dotnet-version-${{ github.ref_name }}-linux-musl-x64.tar.gz
           asset_content_type: application/gzip
 
       - name: .NET Pack
