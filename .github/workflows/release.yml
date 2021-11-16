@@ -5,8 +5,9 @@ name: Release
 
 on:
   push:
+    branches:
+      - main
     tags:
-      - '*'
 
 jobs:
   check:
@@ -20,6 +21,7 @@ jobs:
       - uses: actions/checkout@v2
   build:
     name: Build
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,11 +36,14 @@ jobs:
       - name: Install deploy tools
         run: dotnet tool install -g gpr
 
+      - name: Fetch tags
+        run: git fetch --tags
+
       - name: .NET Restore
         run: dotnet restore
 
       - name: .NET Update version to ${{ github.ref }}
-        run: dotnet run -f net6.0 -- set dotnet-version.csproj ${{ github.ref }}
+        run: dotnet run -f net6.0 -- set dotnet-version.csproj `git tag -l | tail -n 1`
 
       - name: .NET Build (win10-x64)
         run: |
@@ -154,4 +159,6 @@ jobs:
           dotnet pack -c Release
 
       - name: .NET Publish NuGet
-        run: gpr push nupkg/dotnet-version.${{ github.ref }}.nupkg -k ${{ github.TOKEN }}
+        run: |
+          tag = "`git tag -l | tail -n 1`"
+          gpr push nupkg/dotnet-version.$tag.nupkg -k ${{ github.TOKEN }}
