@@ -26,7 +26,9 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ github.TOKEN }}
 
       - name: Find tag
-        run: git describe --tags --abbrev=0
+        run: |
+          git fetch --tags
+          git describe --tags --abbrev=0 --always
 
       - name: Set old tag
         run: dotnet run -f net6.0 -- set dotnet-version.csproj `git describe --tags --abbrev=0`
