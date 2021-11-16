@@ -10,6 +10,15 @@ on:
     types: [closed]
 
 jobs:
+  check:
+    name: Assumption check
+    runs-on: ubuntu-latest
+    steps:
+      - name: print base_ref
+        run: echo ${{ github.event.base_ref }}
+      - name: print merged state
+        run: echo ${{ github.event.pull_request.merged }}
+      - uses: actions/checkout@v2
   bump:
     name: Bump tag
     if: github.event.pull_request.merged == true
