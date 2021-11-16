@@ -37,6 +37,7 @@ jobs:
       - name: Find tag
         run: |
           git fetch --tags
+          git tag -l | tail -n 1
           git describe --tags --abbrev=1 --always
           git describe --tags --abbrev=0
 
