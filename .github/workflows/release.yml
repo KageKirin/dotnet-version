@@ -51,7 +51,11 @@ jobs:
       - name: Install deploy tools
         run: dotnet tool install -g gpr
 
+      - name: Print tags
+        run: git tag -l --sort v:refname
+
       - name: Fetch tags
+        if: false
         run: git fetch --tags
 
       - name: .NET Restore
