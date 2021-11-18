@@ -10,8 +10,10 @@ namespace dotnet_version
 {
     public class Project
     {
-        public static Regex VersionRegex =
-            new Regex(@"^(?<major>[0-9]+)\.(?<minor>[0-9]+)\.(?<patch>[0-9]+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        public static Regex VersionRegex = new Regex(
+            @"^(?<major>0|[1-9]\d*)\.(?<minor>0|[1-9]\d*)\.(?<patch>0|[1-9]\d*)(?:-(?<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         private XDocument _document { get; }
         private XElement  _version { get; }
 
