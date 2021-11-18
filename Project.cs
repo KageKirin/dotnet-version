@@ -29,11 +29,12 @@ namespace dotnet_version
             }
         }
 
-        public Tuple<int, int, int> VersionTuple
+        public Tuple<int, int, int, string, string> VersionTuple
         {
             get {
-                int   major = 0, minor = 0, patch = 0;
-                Match match = VersionRegex.Match(Version);
+                int    major = 0, minor = 0, patch = 0;
+                string prerelease = "", buildmetadata = "";
+                Match  match = VersionRegex.Match(Version);
                 if (match.Success)
                 {
                     if (match.Groups.ContainsKey("major") && !string.IsNullOrEmpty(match.Groups["major"].Value))
@@ -48,12 +49,20 @@ namespace dotnet_version
                     {
                         patch = Int32.Parse(match.Groups["patch"].Value);
                     }
+                    if (match.Groups.ContainsKey("prerelease") && !string.IsNullOrEmpty(match.Groups["prerelease"].Value))
+                    {
+                        prerelease = match.Groups["prerelease"].Value;
+                    }
+                    if (match.Groups.ContainsKey("buildmetadata") && !string.IsNullOrEmpty(match.Groups["buildmetadata"].Value))
+                    {
+                        buildmetadata = match.Groups["buildmetadata"].Value;
+                    }
                 }
                 else
                 {
                     throw new Exception("failed to parse version string");
                 }
-                return new Tuple<int, int, int>(major, minor, patch);
+                return new Tuple<int, int, int, string, string>(major, minor, patch, prerelease, buildmetadata);
             }
         }
 
