@@ -22,9 +22,9 @@ namespace dotnet_version
     {
         public static async Task<int> ExecuteAsync(BumpOptions opts)
         {
-            Project proj                      = new Project(opts.Project);
-            var     version                   = proj.Version;
-            (int major, int minor, int patch) = proj.VersionTuple;
+            Project proj                                                               = new Project(opts.Project);
+            var     version                                                            = proj.Version;
+            (int major, int minor, int patch, string prerelease, string buildmetadata) = proj.VersionTuple;
 
             if (opts.Major)
                 major++;
@@ -35,7 +35,9 @@ namespace dotnet_version
             if (opts.Patch)
                 patch++;
 
-            proj.Version = $"{major}.{minor}.{patch}";
+            proj.Version = $"{major}.{minor}.{patch}"                                                                  //
+                           + (prerelease != null && prerelease != "" && prerelease.Length > 0 ? $"-{prerelease}" : "") //
+                           + (buildmetadata != null && buildmetadata != "" && buildmetadata.Length > 0 ? $"+{buildmetadata}" : "");
             await proj.Write();
 
             return await Get.ExecuteAsync(new GetOptions { Project = proj.FileName });
